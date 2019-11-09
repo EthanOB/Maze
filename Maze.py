@@ -39,7 +39,7 @@ if option == 1:
     Death("You died because the cake was poisoned")
 if option == 2:
     while Gameover != 1:
-    print ("There is a fan, a toybox, a door, and a window.")
+        print ("There is a fan, a toybox, a door, and a window.")
 option = int(input("Inspect fan 1, inspect toybox 2, inspect door 3, and inspect window 4 >"))
 if option == 1:
     if Light/Fan == 0:
