@@ -42,7 +42,8 @@ def lock():
     if Door.Uses == 0:
         print ("Sorry, the door can't be opened")
     if the Door.Uses == 1:
-        
+        option = Question("The door is unlocked\nWould you like to leave the room 1 or stay in the room 2")
+
 #Classes
 class Object:
     def __init__(self, Name, Func, Uses):
