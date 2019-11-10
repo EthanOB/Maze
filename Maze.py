@@ -30,12 +30,18 @@ def clear(times):
         print("\n\n")
     if times == 3:
         print ("\n\n\n")
+
 def unlock():
-    if Key.Uses = 0:
+    if Key.Uses == 0:
         Door.Uses = 1
         Key.Uses = 1
-    if Key.Uses = 1:
+    if Key.Uses == 1:
         print("Sorry, you have already unlocked the door")
+
+def lock()
+    if Door.Uses == 0:
+        print ("Sorry, the dorr is locked")
+    if the Door.Uses == 1:
 #Classes
 class Object:
     def __init__(self, Name, Func, Uses):
