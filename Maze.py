@@ -38,10 +38,11 @@ def unlock():
     if Key.Uses == 1:
         print("Sorry, you have already unlocked the door")
 
-def lock()
+def lock():
     if Door.Uses == 0:
-        print ("Sorry, the dorr is locked")
+        print ("Sorry, the door can't be opened")
     if the Door.Uses == 1:
+        
 #Classes
 class Object:
     def __init__(self, Name, Func, Uses):
