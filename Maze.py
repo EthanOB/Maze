@@ -4,6 +4,7 @@ import time
 #Variables
 option = 0
 Gameover = 0
+
 #Function setup
 def Question(Prompt, Max):
     Answer = int(input(Prompt))
@@ -17,33 +18,31 @@ def Death(Message):
 
 #a ={"pie":True, "cake":False}
 
+def List(List):
+    temp = []
+    i = 0
+    while i < len(List):
+        temp.append(List[i].Name)
+    return ''.join(temp) #
+
 def toggle():
-    if Fan.Uses == 0:
-        Fan.Uses = 1
-    elif Fan.Uses == 0:
-        Fan.Uses = 1
+    Fan.Uses = not Fan.Uses
 
 def clear(times):
-    if times == 1:
-        print("\n")
-    if times == 2:
-        print("\n\n")
-    if times == 3:
-        print ("\n\n\n")
+    print("\n"*times)
 
-def unlock():
-    if Key.Uses == 0:
-        Door.Uses = 1
-        Key.Uses = 1
-    if Key.Uses == 1:
-        print("Sorry, you have already unlocked the door")
+def togglelock():
+    Key.Uses = not Key.Uses
+    Door.Uses = not Door.Uses
 
-def lock():
-    if Door.Uses == 0:
-        print ("Sorry, the door can't be opened")
-    if the Door.Uses == 1:
+def locked():
+    if Door.Uses == False:
+        print ("\nSorry, the door is locked and there is a keyhole")
+    if Door.Uses == True:
         option = Question("The door is unlocked\nWould you like to leave the room 1 or stay in the room 2")
-
+        if option == 1:
+            print ("You won the game and escaped the room!\nThe game is now terminating")
+            exit()
 #Classes
 class Object:
     def __init__(self, Name, Func, Uses):
@@ -73,9 +72,9 @@ Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20)
 #     if direction == "west":
 #         Player.Pos[0] = Player.Pos[0] - 1
 #def Objects
-Key = Object("Key", unlock, 0)
-Fan = Object("Fan", toggle, 0)
-Door = object("Fan", locked, 0)
+Key = Object("Key", togglelock, False)
+Fan = Object("Fan", toggle, False)
+Door = Object("Fan", locked, False)
 
 #Main Program
 print ("This is an adventure game.\nThe goal of this game is to escape the room")
@@ -89,25 +88,40 @@ if option == 2:
         clear(2)
         print ("There is a fan, a cake, a toybox, a door, and a window in the room")
         clear(1)
-        option = Question("Inspect fan 1, cake 2, inspect toybox 3, inspect door 4, and inspect window 5 >", 5)
+        option = Question("Inspect fan 1, cake 2, toybox 3, and door 4\nview inventory 5 >", 5) #Window???
         if option == 1:
-            if Fan.Uses == 0:
+            if Fan.Uses == False:
                 option = Question("The fan is old and is turned off\nThere is a light switch on wall\nTurn the switch on 1 or don't touch the switch 2 >", 2)
                 if option == 1:
                     Fan.Func()
                     print("the lights turned on and the fan started to slowerly turn")
-            elif Fan.Uses == 1:
+            elif Fan.Uses == True:
                 option = Question("The fan is old and is turned on\nThere is a light switch on wall\nTurn the switch off 1 or don't touch the switch 2 >", 2)
                 if option == 1:
                     Fan.Func()
-                    print("The light turned off and the fan slowerly stopped")
-        if option == 2:
-            Death("You have dead because you at the poisoned cake")
-        if option == 3:
-            option = Question("You see an old blue toybox\nDo you want to open to toybox 1 or don't touch it 2", 2)
+                    print("\nThe light turned off and the fan slowerly stopped")
+        elif option == 2:
+            Death("\nYou have dead because you at the poisoned cake")
+        elif option == 3:
+            option = Question("\nYou see an old blue toybox\nDo you want to open to toybox 1 or don't touch it 2", 2)
             if option == 1:
-                option = Question("There are some old toys and stuffed animals\nDo you want to investigate more 1 or go back to the room 2", 2)
+                option = Question("\nThere are some old toys and stuffed animals\nDo you want to investigate more 1 or go back to the room 2", 2)
                 if option == 1:
-                    option = Question("There are keys in the bottom of the toybox\nDo you want to obtain the key 1 or go back to the room 2", 2)
+                    option = Question("\nThere are keys in the bottom of the toybox\nDo you want to obtain the key 1 or go back to the room 2", 2)
                     if option == 1:
-                        Player.Inventory = Player.Inventory + Key
+                        Player.Inventory.append(Key)
+                        print("You obtained the key")
+        elif option == 4:
+            Door.Func()
+        elif option == 5 and len(Player.Inventory) > 0:
+            option = Question(''.join([List(Player.Inventory), "\nType in the number of the item you want to use"]), len(Player.Inventory))
+            if option > len(Player.Inventory):
+                Player.Inventory[-1].Func()
+            elif option < len(Player.Inventory):
+                Player.Inventory[0].Func()
+            else:
+                Player.Inventory[(option - 1)].Func()
+        elif option == 5 and len(Player.Inventory) == 0:
+            print("\nSorry, there is nothing in your inventory")
+#        if option == 6:
+#            print("Inspect window code goes here:")
