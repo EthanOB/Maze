@@ -22,8 +22,9 @@ def List(List):
     temp = []
     i = 0
     while i < len(List):
-        temp.append(List[i].Name)
-    return ''.join(temp) #
+        temp.append(Player.Inventory[i].Name)
+        i = i + 1
+    return ", ".join(temp)
 
 def toggle():
     Fan.Uses = not Fan.Uses
@@ -39,7 +40,7 @@ def locked():
     if Door.Uses == False:
         print ("\nSorry, the door is locked and there is a keyhole")
     if Door.Uses == True:
-        option = Question("The door is unlocked\nWould you like to leave the room 1 or stay in the room 2")
+        option = Question("The door is unlocked\nWould you like to leave the room 1 or stay in the room 2", 2)
         if option == 1:
             print ("You won the game and escaped the room!\nThe game is now terminating")
             exit()
@@ -114,7 +115,7 @@ if option == 2:
         elif option == 4:
             Door.Func()
         elif option == 5 and len(Player.Inventory) > 0:
-            option = Question(''.join([List(Player.Inventory), "\nType in the number of the item you want to use"]), len(Player.Inventory))
+            option = Question(f"{List(Player.Inventory)} \nType in the number of the item you want to use", len(Player.Inventory))
             if option > len(Player.Inventory):
                 Player.Inventory[-1].Func()
             elif option < len(Player.Inventory):
