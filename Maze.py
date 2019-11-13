@@ -44,6 +44,14 @@ def locked():
         if option == 1:
             print ("You won the game and escaped the room!\nThe game is now terminating")
             exit()
+
+def break(Hits, BreakPoint):
+    Window.Uses = Window.Uses + Hits
+    if Window.Uses > BreakPoint:
+        option = Question(f"You hit the window {Window.Uses} times and the window broke\nWould you like to escape through the window 1 or stay in the room 2? >")
+        if option == 1:
+            print("You have won the game and escaped the room!\nThe game is now terminating")
+            exit()
 #Classes
 class Object:
     def __init__(self, Name, Func, Uses):
@@ -51,11 +59,6 @@ class Object:
         self.Func = Func
         self.Uses = Uses
 
-
-#sadfasdf = Object("A", a)
-#hi = Object("A", c)
-#hi.Func()
-#sadfasdf.Func()
 class Player:
     def __init__(self, Name, Inventory, Hand, Score, Money):
         self.Inventory = Inventory
@@ -63,7 +66,7 @@ class Player:
         self.Hand = Hand
         self.Score = Score
         self.Money = Money
-        self.Pos = [0, 0]
+#        self.Pos = [0, 0]
 
 Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20)
 
@@ -76,10 +79,10 @@ Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20)
 Key = Object("Key", togglelock, False)
 Fan = Object("Fan", toggle, False)
 Door = Object("Fan", locked, False)
-
+Window = Object("Window", break, 0)
 #Main Program
 print ("This is an adventure game.\nThe goal of this game is to escape the room")
-option = Question("Hello\nDo you want to play a multiroom game 1 or single roomed game 2\n(note only the single room game is working at the movement) >", 2)
+option = Question(f"Hello {Player.Name}\nDo you want to play a multiroom game 1 or single roomed game 2\n(note only the single room game is working at the movement) >", 2)
 clear(2)
 if option == 1:
     print ("Error\nThis part of the program doesn't exist at the moment")
@@ -115,7 +118,11 @@ if option == 2:
         elif option == 4:
             Door.Func()
         elif option == 5:
-                    print("There is a slightly cracked window")
+            print("There is a slightly cracked window")
+            option = Question("Would you like to punch the window")
+            if option == 1:
+                Window.Func(1, 5)
+
 
         elif option == 6 and len(Player.Inventory) > 0:
             option = Question(f"{List(Player.Inventory)} \nType in the number of the item you want to use", len(Player.Inventory))
