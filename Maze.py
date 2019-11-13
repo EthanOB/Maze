@@ -89,7 +89,7 @@ if option == 2:
         clear(2)
         print ("There is a fan, a cake, a toybox, a door, and a window in the room")
         clear(1)
-        option = Question("Inspect fan 1, cake 2, toybox 3, and door 4\nview inventory 5 >", 5) #Window???
+        option = Question("Inspect fan 1, cake 2, toybox 3, door 4, and window 5\nview inventory 6 >", 6) #Window???
         if option == 1:
             if Fan.Uses == False:
                 option = Question("The fan is old and is turned off\nThere is a light switch on wall\nTurn the switch on 1 or don't touch the switch 2 >", 2)
@@ -104,17 +104,20 @@ if option == 2:
         elif option == 2:
             Death("\nYou have dead because you at the poisoned cake")
         elif option == 3:
-            option = Question("\nYou see an old blue toybox\nDo you want to open to toybox 1 or don't touch it 2", 2)
+            option = Question("\nYou see an old blue toybox\nDo you want to open to toybox 1 or don't touch it 2 >", 2)
             if option == 1:
-                option = Question("\nThere are some old toys and stuffed animals\nDo you want to investigate more 1 or go back to the room 2", 2)
+                option = Question("\nThere are some old toys and stuffed animals\nDo you want to investigate more 1 or go back to the room 2 >", 2)
                 if option == 1:
-                    option = Question("\nThere are keys in the bottom of the toybox\nDo you want to obtain the key 1 or go back to the room 2", 2)
+                    option = Question("\nThere are keys in the bottom of the toybox\nDo you want to obtain the key 1 or go back to the room 2 >", 2)
                     if option == 1:
                         Player.Inventory.append(Key)
                         print("You obtained the key")
         elif option == 4:
             Door.Func()
-        elif option == 5 and len(Player.Inventory) > 0:
+        elif option == 5:
+                    print("There is a slightly cracked window")
+
+        elif option == 6 and len(Player.Inventory) > 0:
             option = Question(f"{List(Player.Inventory)} \nType in the number of the item you want to use", len(Player.Inventory))
             if option > len(Player.Inventory):
                 Player.Inventory[-1].Func()
@@ -122,7 +125,5 @@ if option == 2:
                 Player.Inventory[0].Func()
             else:
                 Player.Inventory[(option - 1)].Func()
-        elif option == 5 and len(Player.Inventory) == 0:
+        elif option == 6 and len(Player.Inventory) == 0:
             print("\nSorry, there is nothing in your inventory")
-#        if option == 6:
-#            print("Inspect window code goes here:")
