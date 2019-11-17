@@ -1,6 +1,3 @@
-#Imports
-import time
-
 #Variables
 option = 0
 Gameover = 0
@@ -45,10 +42,11 @@ def locked():
             print ("You won the game and escaped the room!\nThe game is now terminating")
             exit()
 
-def break(Hits, BreakPoint):
+def damageW(Hits, BreakPoint):
     Window.Uses = Window.Uses + Hits
+    print(f"You hit the window {Window.Uses} times")
     if Window.Uses > BreakPoint:
-        option = Question(f"You hit the window {Window.Uses} times and the window broke\nWould you like to escape through the window 1 or stay in the room 2? >")
+        option = Question("The window broke\nWould you like to escape through the window 1 or stay in the room 2? >",2)
         if option == 1:
             print("You have won the game and escaped the room!\nThe game is now terminating")
             exit()
@@ -66,7 +64,7 @@ class Player:
         self.Hand = Hand
         self.Score = Score
         self.Money = Money
-#        self.Pos = [0, 0]
+        self.Pos = [0, 0]
 
 Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20)
 
@@ -79,7 +77,7 @@ Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20)
 Key = Object("Key", togglelock, False)
 Fan = Object("Fan", toggle, False)
 Door = Object("Fan", locked, False)
-Window = Object("Window", break, 0)
+Window = Object("Window", damageW, 0)
 #Main Program
 print ("This is an adventure game.\nThe goal of this game is to escape the room")
 option = Question(f"Hello {Player.Name}\nDo you want to play a multiroom game 1 or single roomed game 2\n(note only the single room game is working at the movement) >", 2)
@@ -119,9 +117,11 @@ if option == 2:
             Door.Func()
         elif option == 5:
             print("There is a slightly cracked window")
-            option = Question("Would you like to punch the window")
-            if option == 1:
-                Window.Func(1, 5)
+            option = Question("Would you like to punch the window 1 or go back to the room 2 >", 2)
+            while option == 1:
+                Window.Func(1, 6)
+                option = Question("Would you like to punch the window 1 or go back to the room 2 >", 2)
+
 
 
         elif option == 6 and len(Player.Inventory) > 0:
