@@ -13,8 +13,6 @@ def Death(Message):
     print(Message)
     exit()
 
-#a ={"pie":True, "cake":False}
-
 def List(List):
     temp = []
     i = 0
@@ -51,11 +49,6 @@ def damageW(Hits, BreakPoint):
             print("You have won the game and escaped the room!\nThe game is now terminating")
             exit()
 #Classes
-class Room:
-    def __init__(self, Pos, OIR, Func):
-        self.Pos = Pos
-        self.OIR = OIR
-        self.Func = Func
 class Object:
     def __init__(self, Name, Func, Uses):
         self.Name = Name
@@ -63,31 +56,21 @@ class Object:
         self.Uses = Uses
 
 class Player:
-    def __init__(self, Name, Inventory, Hand, Score, Money, Pos):
+    def __init__(self, Name, Inventory, Hand, Score, Money):
         self.Inventory = Inventory
         self.Name = Name
         self.Hand = Hand
         self.Score = Score
         self.Money = Money
-        self.Pos = [0, 0]
-#def Rooms and player
-#Room = Room(Position, objects in room, function)
-Front Room = Room([0,0], , )
-Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20)
 
-#Player.Pos[0] is x
-#Player.Pos[1] is y
-#def go(direction):
-#     if direction == "west":
-#         Player.Pos[0] = Player.Pos[0] - 1
 #def Objects
+Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20)
 Key = Object("Key", togglelock, False)
 Fan = Object("Fan", toggle, False)
 Door = Object("Fan", locked, False)
-Window = Object("Window", damageW, 0)
+Window = Object("Window", damageW, False)
 #Main Program
-print ("This is an adventure game.\nThe goal of this game is to escape the room")
-print (f"Hello {Player.Name}\nYou are playing a single roomed game")
+print (f"This is an adventure game.\nThe goal of this game is to escape the room\nHello {Player.Name}\nYou are playing a single-roomed text adventure game")
 clear(2)
 while 1==1:
     clear(2)
@@ -111,7 +94,7 @@ while 1==1:
         option = Question("\nYou see an old blue toybox\nDo you want to open to toybox 1 or don't touch it 2 >", 2)
         if option == 1:
             option = Question("\nThere are some old toys and stuffed animals\nDo you want to investigate more 1 or go back to the room 2 >", 2)
-                if option == 1:
+            if option == 1:
                 option = Question("\nThere are keys in the bottom of the toybox\nDo you want to obtain the key 1 or go back to the room 2 >", 2)
                 if option == 1:
                     Player.Inventory.append(Key)
