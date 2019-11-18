@@ -1,5 +1,5 @@
 #def lists
-NeededObject = []
+parseobject = []
 command = []
 Start = 0
 
@@ -17,6 +17,9 @@ class Player:
         self.Score = Score
         self.Money = Money
         self.Pos = [0,0]
+#Player.Pos[0] is x
+#Player.Pos[1] is y
+#def go(direction):
 
 class Object:
     def __init__(self, Name, Func, Uses):
@@ -48,7 +51,7 @@ Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20, 
 b = ['take','look']
 take = {'bomb': bomb}
 look = {'inventory': Player.Inventory}
-a = {'take': Player.Inventory.append(NeededObject), 'look': Lookup(NeededObject)}
+a = {'take': Player.Inventory.append(bomb), 'look': Lookup(Player.Inventory)}
 #def parse
 
 def parse(Input):
@@ -60,17 +63,5 @@ def parse(Input):
             Start = i
         i = i + 1
     i = Start + 1
-    while i < len(command):
-        if command[i] in command[Start]:
-            NeededObject = (command[i])
-            print(NeededObject)
-            break
-        elif i == len(command):
-            print(f"there were no objects in command")
-            pass
-        i = i + 1
-    a[command[Start]]
-
-#Player.Pos[0] is x
-#Player.Pos[1] is y
-#def go(direction):
+    a('take')
+#ask to look at Kalebs dictionary python program
