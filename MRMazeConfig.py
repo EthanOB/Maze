@@ -63,5 +63,5 @@ def parse(Input):
             Start = i
         i = i + 1
     i = Start + 1
-    a('take')
+    a('take')(bomb)
 #ask to look at Kalebs dictionary python program

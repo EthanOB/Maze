@@ -56,16 +56,15 @@ class Object:
         self.Uses = Uses
 
 class Player:
-    def __init__(self, Name, Inventory, Hand, Score, Money):
+    def __init__(self, Name, Inventory, Score, Money):
         self.Inventory = Inventory
         self.Name = Name
-        self.Hand = Hand
         self.Score = Score
         self.Money = Money
 
 #def Objects
-Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20)
-Key = Object("Key", togglelock, False)
+Player = Player(input(''.join(["what is player's name? >>> "])), [], 0, 20)
+Key = Object("Key", togglelock, 0)
 Fan = Object("Fan", toggle, False)
 Door = Object("Fan", locked, False)
 Window = Object("Window", damageW, False)
@@ -95,10 +94,13 @@ while 1==1:
         if option == 1:
             option = Question("\nThere are some old toys and stuffed animals\nDo you want to investigate more 1 or go back to the room 2 >", 2)
             if option == 1:
-                option = Question("\nThere are keys in the bottom of the toybox\nDo you want to obtain the key 1 or go back to the room 2 >", 2)
-                if option == 1:
-                    Player.Inventory.append(Key)
-                    print("You obtained the key")
+                if Key not in Player.Inventory:
+                    option = Question("\nThere is a key in the bottom of the toybox\nDo you want to obtain the key 1 or go back to the room 2 >", 2)
+                    if option == 1:
+                            Player.Inventory.append(Key)
+                            print("You obtained the key")
+                else:
+                    print("there is nothing at the bottom of the toybox")
     elif option == 4:
         Door.Func()
     elif option == 5:
