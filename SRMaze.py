@@ -4,9 +4,12 @@ Gameover = 0
 
 #Function setup
 def Question(Prompt, Max):
-    Answer = int(input(Prompt))
-    if Answer > Max or Answer < 1:
-        return "Error"
+    while True:
+        Answer = int(input(Prompt))
+        if Answer < Max and Answer > 0:
+            break
+        elif Answer > Max or Answer < 1:
+            pass
     return Answer
 
 def Death(Message):
