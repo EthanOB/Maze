@@ -1,6 +1,5 @@
 #Variables
 option = 0
-Gameover = 0
 
 #Function setup
 def Question(Prompt, Max):
