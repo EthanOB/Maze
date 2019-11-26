@@ -10,13 +10,14 @@ class Room:
         self.OIR = OIR
 
 class Player:
-    def __init__(self, Name, Inventory, Hand, Score, Money, Pos):
+    def __init__(self, Name, Inventory, Hand, Score, Money, x, y):
         self.Inventory = Inventory
         self.Name = Name
         self.Hand = Hand
         self.Score = Score
         self.Money = Money
-        self.Pos = [0,0]
+        self.x = x
+        slef.y = y
 #Player.Pos[0] is x
 #Player.Pos[1] is y
 #def go(direction):
@@ -42,18 +43,16 @@ bomb = Object("bomb", boom, False)
 
 #def Rooms
 #Room = Room(Position, objects in room)
-FrontRoom = Room([0,0],bomb)
+FrontRoom = Room([0,0],[bomb])
 
 #def Player
-Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20, [0,0])
+Player = Player(input(''.join(["what is player's name? >>> "])), [], [], 0, 20, 0, 0)
 
 #def look up tables and related lists
 b = ['take','look']
-take = {'bomb': bomb}
 look = {'inventory': Player.Inventory}
 a = {'take': Player.Inventory.append(bomb), 'look': Lookup(Player.Inventory)}
 #def parse
-
 def parse(Input):
     i = 0
     command = Input.lower().split()
@@ -61,6 +60,10 @@ def parse(Input):
     while i < len(command):
         if command[i] in b:
             Start = i
+    while i < len(command):
+        if command[i] in Room.OIR:
+        objectN = 0
+            while objectN
         i = i + 1
     i = Start + 1
     a('take')(bomb)

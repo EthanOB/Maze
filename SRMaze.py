@@ -13,14 +13,6 @@ def Death(Message):
     print(Message)
     exit()
 
-def List(List):
-    temp = []
-    i = 0
-    while i < len(List):
-        temp.append(Player.Inventory[i].Name)
-        i = i + 1
-    return ", ".join(temp)
-
 def toggle():
     Fan.Uses = not Fan.Uses
 
@@ -113,7 +105,7 @@ while 1==1:
 
 
     elif option == 6 and len(Player.Inventory) > 0:
-        option = Question(f"{List(Player.Inventory)} \nType in the number of the item you want to use", len(Player.Inventory))
+        option = Question(f"{Player.Inventory} \nType in the number of the item you want to use", len(Player.Inventory))
         if option > len(Player.Inventory):
             Player.Inventory[-1].Func()
         elif option < len(Player.Inventory):
