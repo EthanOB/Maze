@@ -2,10 +2,11 @@
 parseobject = []
 command = []
 Start = 0
+Answer = ''
 
 #def Classes
 class Room:
-    def __init__(self, x, y, OIR):
+    def __init__(self, Name, x, y, OIR):
         self.x = x
         self.y = y
         self.OIR = OIR
@@ -42,7 +43,7 @@ bomb = Object("bomb", boom, False)
 pie = Object("pie", boom, False)
 #def Rooms
 #Room = Room(Position, objects in room)
-FrontRoom = Room( 0, 0,[bomb])
+FrontRoom = Room("FrontRoom", 0, 0,bomb)
 RoomList = [FrontRoom]
 #def Player
 Player = Player(input(''.join(["what is player's name? >>> "])), [], [pie], 0, 20, 0, 0, FrontRoom)
@@ -50,6 +51,7 @@ Player = Player(input(''.join(["what is player's name? >>> "])), [], [pie], 0, 2
 #def look up tables and related lists
 UsableCommands = ['take','look']
 look = {'inventory': Player.Inventory}
+CommandObjects = {'take': [Player.Room.OIR], 'look': [Player.Room.OIR, Player.Inventory]}
 CommandList = {'take': Player.Inventory.append, 'look': print}
 
 #def of RoomControlls
@@ -74,29 +76,30 @@ def RoomControlls():
     i = 0
 
 #def parse
-def parse(Input):
-    while True:
+def parse():
+        Answer = input("What do you want to do >")
+        command = Answer.lower().split()
         i = 0
+        UsedCommand = CommandList[command[i]]
         NullCommand = 0
-        command = Input.lower().split()
+        objectN = 0
+        Start = 0
+        CommandObjectsVar1 = 0
+        CommandObjectsVar2 = 0
         while i < len(command):
             if command[i] in UsableCommands:
+                UsedCommand = CommandList[command[i]]
                 Start = i
-            else:
-                NullCommand = NullCommand + 1
-            i = i + 1
+                break
         i = Start + 1
-        if NullCommand == len(command):
-            pass
         while i < len(command):
-            if command[i] in Player.Room.OIR + Player.Inventory:
-                objectN = 0
-                i = 0
-                while i < Player.Room.OIR:
-                    if objectN is Player.Room.OIR[i]:
-                        objectN = Player.Room.OIR[i]
-                        i = i + 1
+            if command[i] == CommandObjects[command[Start]]:
+                objectN = CommandObjects[UsedCommand]
+                break
+            elif CommandObjectsVar2 < len(CommandObjects[command[Start]]):
+                CommandObjectsVar2 = CommandObjectsVar2 + 1
+            elif CommandObjectsVar1 < len(CommandObjects[command[Start]]):
+                CommandObjectsVar1 = CommandObjectsVar1 + 1
+                CommandObjectsVar2 = 0
             i = i + 1
-        CommandList[command[Start]](f"objectN")
-
-parse("Take pie")
+        UsedCommand(objectN)
