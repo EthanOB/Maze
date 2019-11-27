@@ -94,7 +94,7 @@ def parse():
         i = Start + 1
         while i < len(command):
             if command[i] == CommandObjects[command[Start]]:
-                objectN = CommandObjects[UsedCommand]
+                objectN = 
                 break
             elif CommandObjectsVar2 < len(CommandObjects[command[Start]]):
                 CommandObjectsVar2 = CommandObjectsVar2 + 1
