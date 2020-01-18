@@ -43,10 +43,10 @@ bomb = Object("bomb", boom, False)
 pie = Object("pie", boom, False)
 #def Rooms
 #Room = Room(Position, objects in room)
-FrontRoom = Room("FrontRoom", 0, 0,bomb)
+FrontRoom = Room("FrontRoom", 0, 0,{"bomb":bomb})
 RoomList = [FrontRoom]
 #def Player
-Player = Player(input(''.join(["what is player's name? >>> "])), [], [pie], 0, 20, 0, 0, FrontRoom)
+Player = Player(input("what is player's name? >>> "), [], [pie], 0, 20, 0, 0, FrontRoom)
 
 #def look up tables and related lists
 UsableCommands = ['take','look']
@@ -80,7 +80,7 @@ def parse():
         Answer = input("What do you want to do >")
         command = Answer.lower().split()
         i = 0
-        UsedCommand = CommandList[command[i]]
+        UsedCommand = ""
         NullCommand = 0
         objectN = 0
         Start = 0
@@ -88,13 +88,14 @@ def parse():
         CommandObjectsVar2 = 0
         while i < len(command):
             if command[i] in UsableCommands:
+                CommandTx = command[i]
                 UsedCommand = CommandList[command[i]]
                 Start = i
                 break
         i = Start + 1
         while i < len(command):
-            if command[i] == CommandObjects[command[Start]]:
-                objectN = 
+            if command[i] == CommandObjects[CommandTx]:
+                objectN = CommandObjectsVar1[CommandTx]
                 break
             elif CommandObjectsVar2 < len(CommandObjects[command[Start]]):
                 CommandObjectsVar2 = CommandObjectsVar2 + 1
