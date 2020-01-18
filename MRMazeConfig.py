@@ -3,13 +3,15 @@ parseobject = []
 command = []
 Start = 0
 Answer = ''
-
+#def Varaible
+objectN = 0
 #def Classes
 class Room:
-    def __init__(self, Name, x, y, OIR):
+    def __init__(self, Name, x, y, OIR,Descript):
         self.x = x
         self.y = y
         self.OIR = OIR
+        self.Descript = Descript
 
 class Player:
     def __init__(self, Name, Inventory, Hand, Score, Money, x, y, Room):
@@ -41,18 +43,11 @@ def Lookup(RequestedObject):
 #def Objects
 bomb = Object("bomb", boom, False)
 pie = Object("pie", boom, False)
-#def Rooms
-#Room = Room(Position, objects in room)
-FrontRoom = Room("FrontRoom", 0, 0,{"bomb":bomb})
+#def Rooms Room = Room(Position, objects in room)
+FrontRoom = Room("FrontRoom", 0, 0,(bomb),(bomb.Name))
 RoomList = [FrontRoom]
 #def Player
 Player = Player(input("what is player's name? >>> "), [], [pie], 0, 20, 0, 0, FrontRoom)
-
-#def look up tables and related lists
-UsableCommands = ['take','look']
-look = {'inventory': Player.Inventory}
-CommandObjects = {'take': [Player.Room.OIR], 'look': [Player.Room.OIR, Player.Inventory]}
-CommandList = {'take': Player.Inventory.append, 'look': print}
 
 #def of RoomControlls
 def RoomControlls():
@@ -66,7 +61,7 @@ def RoomControlls():
             NullRoom = NullRoom + 1
         i = i + 1
         if (NullRoom == len(RoomList)):
-            print('You can not move to this room') #make program to fin the nearest room
+            print('You can not move to this room') #make program to find the nearest room
             break
     i = 0
     while (i < len(NRoomList)):
@@ -74,33 +69,19 @@ def RoomControlls():
             Player.Room = NRoomList[i]
         i = i + 1
     i = 0
-
 #def parse
 def parse():
         Answer = input("What do you want to do >")
         command = Answer.lower().split()
-        i = 0
-        UsedCommand = ""
-        NullCommand = 0
-        objectN = 0
-        Start = 0
-        CommandObjectsVar1 = 0
-        CommandObjectsVar2 = 0
+        CommandFunc = ""
         while i < len(command):
-            if command[i] in UsableCommands:
-                CommandTx = command[i]
-                UsedCommand = CommandList[command[i]]
-                Start = i
-                break
-        i = Start + 1
-        while i < len(command):
-            if command[i] == CommandObjects[CommandTx]:
-                objectN = CommandObjectsVar1[CommandTx]
-                break
-            elif CommandObjectsVar2 < len(CommandObjects[command[Start]]):
-                CommandObjectsVar2 = CommandObjectsVar2 + 1
-            elif CommandObjectsVar1 < len(CommandObjects[command[Start]]):
-                CommandObjectsVar1 = CommandObjectsVar1 + 1
-                CommandObjectsVar2 = 0
-            i = i + 1
+            if command[i] = 'take'
+                
+            elif command[i] = 'look'
+
+            elif command[i] = 'move'
+
+        i = i + 1
+
+
         UsedCommand(objectN)
