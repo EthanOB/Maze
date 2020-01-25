@@ -75,14 +75,14 @@ while 1==1:
             option = Question("The fan is old and is turned off\nThere is a light switch on wall\nTurn the switch on 1 or don't touch the switch 2 >", 2)
             if option == 1:
                 Fan.Func()
-                print("the lights turned on and the fan started to slowerly turn")
+                print("the lights turned on and the fan started to slowly turn")
         elif Fan.Uses == True:
             option = Question("The fan is old and is turned on\nThere is a light switch on wall\nTurn the switch off 1 or don't touch the switch 2 >", 2)
             if option == 1:
                 Fan.Func()
                 print("\nThe light turned off and the fan slowerly stopped")
     elif option == 2:
-        Death("\nYou have dead because you at the poisoned cake")
+        Death("\nYou have dead because you ate the poisoned cake")
     elif option == 3:
         option = Question("\nYou see an old blue toybox\nDo you want to open to toybox 1 or don't touch it 2 >", 2)
         if option == 1:
