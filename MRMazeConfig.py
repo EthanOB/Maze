@@ -73,15 +73,19 @@ def RoomControlls():
 def parse():
         Answer = input("What do you want to do >")
         command = Answer.lower().split()
+        UsedCommand = ""
+        StartS = 0
         CommandFunc = ""
         while i < len(command):
-            if command[i] = 'take'
-                
-            elif command[i] = 'look'
-
-            elif command[i] = 'move'
+            if command[i] == 'take':
+                UsedCommand = append
+                StartS = i
+            elif command[i] == 'look':
+                UsedCommand = print
+                StartS = i
+            elif command[i] == 'move':
+                StartS = i
+                while StartS < len(command):
+                    if command[StartS] == "west":
 
         i = i + 1
-
-
-        UsedCommand(objectN)
