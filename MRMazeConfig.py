@@ -25,10 +25,9 @@ class Player:
         self.Room = Room
 
 class Object:
-    def __init__(self, Name, Func, Uses):
+    def __init__(self, Name, Func,):
         self.Name = Name
         self.Func = Func
-        self.Uses = Uses
 #def functions
 def Death(Message):
     print(Message)
@@ -44,10 +43,10 @@ def Lookup(RequestedObject):
 bomb = Object("bomb", boom, False)
 pie = Object("pie", boom, False)
 #def Rooms Room = Room(Position, objects in room)
-FrontRoom = Room("FrontRoom", 0, 0,(bomb),(bomb.Name))
+FrontRoom = Room("FrontRoom", 0, 0,(bomb),0)
 RoomList = [FrontRoom]
 #def Player
-Player = Player(input("what is player's name? >>> "), [], [pie], 0, 20, 0, 0, FrontRoom)
+Player = Player(input("what is player's name? >>> "), [], [pie], 0, 20, [0,0])
 
 #def of RoomControlls
 def RoomControlls():
@@ -55,20 +54,12 @@ def RoomControlls():
     NullRoom = 0
     NRoomList = []
     while i < len(RoomList):
-        if Player.x == RoomList[i].x:
-            NRoomList.append(RoomList[i])
+        if Player.Room in RoomList:
+            while Player.Room != Roomlist(i)
+                i = i + 1
         else:
-            NullRoom = NullRoom + 1
-        i = i + 1
-        if (NullRoom == len(RoomList)):
-            print('You can not move to this room') #make program to find the nearest room
-            break
-    i = 0
-    while (i < len(NRoomList)):
-        if Player.y == NRoomList[i].y:
-            Player.Room = NRoomList[i]
-        i = i + 1
-    i = 0
+            print("No Room! You are moved back to the front room")
+            Player.Room = [0,0]
 #def parse
 def parse():
         Answer = input("What do you want to do >")
@@ -85,7 +76,8 @@ def parse():
                 StartS = i
             elif command[i] == 'move':
                 StartS = i
-                while StartS < len(command):
-                    if command[StartS] == "west":
+                if command[StartS+1] == 'west':
+                    if
+
 
         i = i + 1
