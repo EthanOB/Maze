@@ -7,14 +7,15 @@ Answer = ''
 objectN = 0
 #def Classes
 class Room:
-    def __init__(self, Name, x, y, OIR,Descript):
+    def __init__(self,Name,x, y, OIR,Descript,MDirections):
         self.x = x
         self.y = y
         self.OIR = OIR
         self.Descript = Descript
+        self.MDirections = MDirections
 
 class Player:
-    def __init__(self, Name, Inventory, Hand, Score, Money, x, y, Room):
+    def __init__(self, Name, Inventory, Hand, Score, Money, x, y, Room, RoomC):
         self.Inventory = Inventory
         self.Name = Name
         self.Hand = Hand
@@ -22,6 +23,7 @@ class Player:
         self.Money = Money
         self.x = x
         self.y = y
+        self.RoomC = RoomC
         self.Room = Room
 
 class Object:
@@ -40,13 +42,14 @@ def Lookup(RequestedObject):
     print(f"{RequestedObject}")
 
 #def Objects
-bomb = Object("bomb", boom, False)
-pie = Object("pie", boom, False)
+bomb = Object("bomb", boom)
+pie = Object("pie", boom)
 #def Rooms Room = Room(Position, objects in room)
-FrontRoom = Room("FrontRoom", 0, 0,(bomb),0)
+FrontRoom = Room("FrontRoom", 0, 0,(bomb),("You are in the frontroom./n You can move west, south, east, and north."),('west','east','north','south'))
+RoomListXY = [(0,0)]
 RoomList = [FrontRoom]
 #def Player
-Player = Player(input("what is player's name? >>> "), [], [pie], 0, 20, [0,0])
+Player = Player(input("what is player's name? >>> "), [], [pie],0,0,0,0,FrontRoom,(0,0))
 
 #def of RoomControlls
 def RoomControlls():
@@ -55,16 +58,19 @@ def RoomControlls():
     NRoomList = []
     while i < len(RoomList):
         if Player.Room in RoomList:
-            while Player.Room != Roomlist(i)
+            while Player.Room != Roomlist(i):
                 i = i + 1
+                Player.x = Player.Room(0)
+                Player.y = Player.Room(1)
         else:
             print("No Room! You are moved back to the front room")
-            Player.Room = [0,0]
+            Player.Room = (0,0)
 #def parse
 def parse():
         Answer = input("What do you want to do >")
         command = Answer.lower().split()
         UsedCommand = ""
+        i = 0
         StartS = 0
         CommandFunc = ""
         while i < len(command):
@@ -72,12 +78,21 @@ def parse():
                 UsedCommand = append
                 StartS = i
             elif command[i] == 'look':
-                UsedCommand = print
                 StartS = i
+                if command[StartS+1] == 'around':
+                    print((Player.Room).Descript)
             elif command[i] == 'move':
                 StartS = i
                 if command[StartS+1] == 'west':
-                    if
-
-
-        i = i + 1
+                    Player.Room = (Player.x-1, Player.y)
+                    print('You moved west')
+                elif command[StartS+1] == 'east':
+                    Player.Room = (Player.x+1, Player.y)
+                    print('You moved east')
+                elif command[StartS+1] == 'north':
+                    Player.Room = (Player.x, Player.y+1)
+                    print('You moved north')
+                elif command[StartS+1] == 'south':
+                    Player.Room = (Player.x, Player.y-1)
+                    print('You moved south')
+            i = i + 1
