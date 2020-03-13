@@ -45,26 +45,25 @@ def Lookup(RequestedObject):
 bomb = Object("bomb", boom)
 pie = Object("pie", boom)
 #def Rooms Room = Room(Position, objects in room)
-FrontRoom = Room("FrontRoom", 0, 0,(bomb),("You are in the frontroom./n You can move west, south, east, and north."),('west','east','north','south'))
+FrontRoom = Room("FrontRoom", 0, 0,(bomb),("You are in the frontroom.\nYou can move west, south, east, and north."),('west','east','north','south'))
 RoomListXY = [(0,0)]
 RoomList = [FrontRoom]
 #def Player
-Player = Player(input("what is player's name? >>> "), [], [pie],0,0,0,0,FrontRoom,(0,0))
+Player = Player(input("what is player's name? >>> "), [], [pie],0,0,0,0,FrontRoom,[0,0])
 
 #def of RoomControlls
 def RoomControlls():
     i = 0
     NullRoom = 0
     NRoomList = []
-    while i < len(RoomList):
-        if Player.Room in RoomList:
-            while Player.Room != Roomlist(i):
-                i = i + 1
-                Player.x = Player.Room(0)
-                Player.y = Player.Room(1)
-        else:
-            print("No Room! You are moved back to the front room")
-            Player.Room = (0,0)
+    if Player.Room in RoomList:
+        while Player.Room != RoomList(i):
+            i = i + 1
+            Player.x = Player.RoomC(0)
+            Player.y = Player.RoomC(1)
+    else:
+        print("No Room! You are moved back to the front room")
+        Player.RoomC = [0,0]
 #def parse
 def parse():
         Answer = input("What do you want to do >")
@@ -84,15 +83,15 @@ def parse():
             elif command[i] == 'move':
                 StartS = i
                 if command[StartS+1] == 'west':
-                    Player.Room = (Player.x-1, Player.y)
+                    Player.Room = [Player.x-1, Player.y]
                     print('You moved west')
                 elif command[StartS+1] == 'east':
-                    Player.Room = (Player.x+1, Player.y)
+                    Player.Room = [Player.x+1, Player.y]
                     print('You moved east')
                 elif command[StartS+1] == 'north':
-                    Player.Room = (Player.x, Player.y+1)
+                    Player.Room = [Player.x, Player.y+1]
                     print('You moved north')
                 elif command[StartS+1] == 'south':
-                    Player.Room = (Player.x, Player.y-1)
+                    Player.Room = [Player.x, Player.y-1]
                     print('You moved south')
             i = i + 1
