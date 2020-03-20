@@ -7,22 +7,19 @@ Answer = ''
 objectN = 0
 #def Classes
 class Room:
-    def __init__(self,Name,x, y, OIR,Descript,MDirections):
-        self.x = x
-        self.y = y
+    def __init__(self,Name,C, OIR,Descript,MDirections):
+        self.C = C
         self.OIR = OIR
         self.Descript = Descript
         self.MDirections = MDirections
 
 class Player:
-    def __init__(self, Name, Inventory, Hand, Score, Money, x, y, Room, RoomC):
+    def __init__(self, Name, Inventory, Hand, Score, Money, Room, RoomC):
         self.Inventory = Inventory
         self.Name = Name
         self.Hand = Hand
         self.Score = Score
         self.Money = Money
-        self.x = x
-        self.y = y
         self.RoomC = RoomC
         self.Room = Room
 
@@ -31,39 +28,25 @@ class Object:
         self.Name = Name
         self.Func = Func
 #def functions
-def Death(Message):
-    print(Message)
-    exit()
-
 def boom():
-    Death("You were blown up")
+    exit("You were blown up")
 
 def Lookup(RequestedObject):
-    print(f"{RequestedObject}")
+    print(f"{RequestedObject}") # this is the way to display death for future use
 
 #def Objects
 bomb = Object("bomb", boom)
 pie = Object("pie", boom)
-#def Rooms Room = Room(Position, objects in room)
-FrontRoom = Room("FrontRoom", 0, 0,(bomb),("You are in the frontroom.\nYou can move west, south, east, and north."),('west','east','north','south'))
-RoomListXY = [(0,0)]
-RoomList = [FrontRoom]
-#def Player
-Player = Player(input("what is player's name? >>> "), [], [pie],0,0,0,0,FrontRoom,[0,0])
 
-#def of RoomControlls
-def RoomControlls():
-    i = 0
-    NullRoom = 0
-    NRoomList = []
-    if Player.Room in RoomList:
-        while Player.Room != RoomList(i):
-            i = i + 1
-            Player.x = Player.RoomC(0)
-            Player.y = Player.RoomC(1)
-    else:
-        print("No Room! You are moved back to the front room")
-        Player.RoomC = [0,0]
+Table = {"bomb": bomb, "pie": pie}
+#def Rooms Room = Room(Position, objects in room)
+WestRoom = Room("WestRoom",[-1,0],['pie'], ("You are in the westroom and it is very dark. \nYou can move east."),('east'))
+FrontRoom = Room("FrontRoom",[0,0],['bomb'],("You are in the frontroom.\nYou can move west, south, east, and north."),('west','east','north','south'))
+RoomCList =[[0,0], [-1,0]]
+RoomList = [FrontRoom, WestRoom]
+#def Player
+Player = Player(input("what is player's name? >>> "), [], [pie],0,0,FrontRoom,[0,0])
+
 #def parse
 def parse():
         Answer = input("What do you want to do >")
@@ -74,24 +57,46 @@ def parse():
         CommandFunc = ""
         while i < len(command):
             if command[i] == 'take':
-                UsedCommand = append
                 StartS = i
+                if command[StartS+1] in (Player.Room).OIR:
+                    print('This is working')
+                    Player.Inventory.append(command[StartS+1])
             elif command[i] == 'look':
                 StartS = i
                 if command[StartS+1] == 'around':
-                    print((Player.Room).Descript)
+                    print(((Player.Room).Descript, (Player.Room)))
+                    break
+                if command[StartS+1] == 'inventory':
+                    print(Player.Inventory)
+                    break
             elif command[i] == 'move':
                 StartS = i
                 if command[StartS+1] == 'west':
-                    Player.Room = [Player.x-1, Player.y]
-                    print('You moved west')
+                    if [Player.RoomC[0]-1, Player.RoomC[1]] in RoomCList:
+                        Player.RoomC = [Player.RoomC[0]-1, Player.RoomC[1]]
+                        print('You moved west')
+                        break
+                    else:
+                        print("That room doesn't exist")
                 elif command[StartS+1] == 'east':
-                    Player.Room = [Player.x+1, Player.y]
-                    print('You moved east')
+                    if [Player.RoomC[0]+1, Player.RoomC[1]] in RoomCList:
+                        Player.RoomC = [Player.RoomC[0]+1, Player.RoomC[1]]
+                        print('You moved east')
+                        break
+                    else:
+                        print("That room doesn't exist")
                 elif command[StartS+1] == 'north':
-                    Player.Room = [Player.x, Player.y+1]
-                    print('You moved north')
+                    if [Player.RoomC[0], Player.RoomC[1]+1] in RoomCList:
+                        Player.RoomC = [Player.RoomC[0], Player.RoomC[1]+1]
+                        print('You moved north')
+                        break
+                    else:
+                        print("That room doesn't exist")
                 elif command[StartS+1] == 'south':
-                    Player.Room = [Player.x, Player.y-1]
-                    print('You moved south')
+                    if [Player.RoomC[0], Player.RoomC[1]-1] in RoomCList:
+                        Player.RoomC = [Player.RoomC[0], Player.RoomC[1]-1]
+                        print('You moved south')
+                        break
+                    else:
+                        print("That room doesn't exist")
             i = i + 1
