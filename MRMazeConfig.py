@@ -26,8 +26,11 @@ class Object:
         self.Func = Func
 #def functions
 def boom():
-    print("Your Score was"+Player.Score)
+    print(f"Your Score was{Player.Score}")
     exit("You were blown up")
+
+def MovePlayer():
+    Player.Room = RoomList[RoomCList.index(Player.RoomC)]
 
 def SplatInTheFace():
     print("You slamed the pie into your own face")
@@ -63,7 +66,7 @@ FrontRoom = Room("FrontRoom",[0,0], bomb, 'bomb', ("You are in the frontroom.\nY
 EastRoom = Room("EastRoom",[1,0], beans, 'beans', ("You are in the eastroom.\nYou can move west"), True)
 DiningRoom = Room("DiningRoom",[0,-1], lamp, 'lamp', ("You are in the diningroom.\nYou can move south and north"), True)
 Garden = Room("Garden", [0,-2], flowers, 'flowers', ("You are in the garden.\nYou can move north."), True)
-Entryway = Room("Entryway", [0,1], key, 'key', ("You are in the garden.\nYou can move north (if door is unlocked) and south"), True)
+Entryway = Room("Entryway", [0,1], key, 'key', ("You are in the entryway.\nYou can move north (if door is unlocked) and south"), True)
 Exit = Room("Exit", [0,2], nothing, 'nothing', ("You won the game"), False)
 RoomCList =[[-1,0], [0,0], [1,0], [0,-1], [0,-2], [0,1]]
 RoomList = [WestRoom, FrontRoom, EastRoom, DiningRoom, Garden, Entryway]
@@ -92,20 +95,20 @@ def parse():
         elif 'look' in command or 'view' in command:
             if 'around' in command:
                 print((Player.Room).Descript+"In the room, there is a "+(Player.Room).OIRN)
-            elif 'inventory' in command:
+            elif 'inventory' in command:wow advancewow
                 print(Player.InventoryN)
         elif 'move' in command or 'go' in command:
             if 'west' in command:
                 if [Player.RoomC[0]-1, Player.RoomC[1]] in RoomCList:
                     Player.RoomC = [Player.RoomC[0]-1, Player.RoomC[1]]
-                    Player.Room = RoomList[RoomCList.index(Player.RoomC)]
+                    MovePlayer()
                     print('You moved west')
                 else:
                     print("That room doesn't exist")
             elif 'east' in command:
                 if [Player.RoomC[0]+1, Player.RoomC[1]] in RoomCList:
                     Player.RoomC = [Player.RoomC[0]+1, Player.RoomC[1]]
-                    Player.Room = RoomList[RoomCList.index(Player.RoomC)]
+                    MovePlayer()
                     print('You moved east')
                 else:
                     print("That room doesn't exist")
@@ -117,14 +120,14 @@ def parse():
                     print("The door is locked")
                 elif [Player.RoomC[0], Player.RoomC[1]+1] in RoomCList:
                     Player.RoomC = [Player.RoomC[0], Player.RoomC[1]+1]
-                    Player.Room = RoomList[RoomCList.index(Player.RoomC)]
+                    MovePlayer()
                     print('You moved north')
                 else:
                     print("That room doesn't exist")
             elif 'south' in command:
                 if [Player.RoomC[0], Player.RoomC[1]-1] in RoomCList:
                     Player.RoomC = [Player.RoomC[0], Player.RoomC[1]-1]
-                    Player.Room = RoomList[RoomCList.index(Player.RoomC)]
+                    MovePlayer()
                     print('You moved south')
                 else:
                     print("That room doesn't exist")
